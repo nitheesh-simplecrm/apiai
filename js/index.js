@@ -17,57 +17,58 @@ $(function() {
 	// setChatHistory
 	// var visitor_id = 2147483647;
 	var visitor_id = $.cookie("userId"); // getting cookie value
+	if(visitor_id)
+	{	
+		$.ajax({
+			url:'savechat.php',
+			method:'post',
+			async:false,
+			data:{
+				call_type:'setChatHistory',
+				visitor_id:visitor_id
+			},
+			success:function(data){
+		    	if (data.trim() == 'no results') {
+	 				
+					// initial chat state
+					//var line = $('<div class="row msg_container base_receive">                        <div class="col-md-2 col-xs-2 avatar">                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">                        </div>                        <div class="col-md-10 col-xs-10">                            <div class="messages msg_receive">                                <p>'+'Hi there, please type something...'+'</p>                            </div>                        </div>                    </div>');
+					//chat.append(line);
+					//chat.stop().animate({ scrollTop: chat.prop("scrollHeight")});
+		    	}
+		    	else{
+		
+					var objData = jQuery.parseJSON(data);
+					$.each(objData , function(i, val) {
 
-	$.ajax({
-		url:'savechat.php',
-		method:'post',
-		async:false,
-		data:{
-			call_type:'setChatHistory',
-			visitor_id:visitor_id
-		},
-		success:function(data){
+					  var ai_answer = objData [i].ai_answer;
+					  var ai_question = objData [i].ai_question;
+					  var timestamp = objData [i].timestamp;
+					  var unix_timestamp = objData [i].unix_timestamp;
+					  var user_id = objData [i].user_id;
 
-	    	if (data.trim() == 'no results') {
- 				
-				// initial chat state
-				//var line = $('<div class="row msg_container base_receive">                        <div class="col-md-2 col-xs-2 avatar">                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">                        </div>                        <div class="col-md-10 col-xs-10">                            <div class="messages msg_receive">                                <p>'+'Hi there, please type something...'+'</p>                            </div>                        </div>                    </div>');
-				//chat.append(line);
-				//chat.stop().animate({ scrollTop: chat.prop("scrollHeight")});
-	    	}
-	    	else{
-	
-				var objData = jQuery.parseJSON(data);
-				$.each(objData , function(i, val) {
+					  console.log(ai_answer);
+					  console.log(ai_question);
+					  console.log(timestamp);
+					  console.log(unix_timestamp);
+					  console.log(user_id);
+					  console.log('===================================================');
 
-				  var ai_answer = objData [i].ai_answer;
-				  var ai_question = objData [i].ai_question;
-				  var timestamp = objData [i].timestamp;
-				  var unix_timestamp = objData [i].unix_timestamp;
-				  var user_id = objData [i].user_id;
+					// append question
+					var line = $('   <div class="row msg_container base_sent">                        <div class="col-md-10 col-xs-10">                          <div class="messages msg_sent">                                <p>'+ai_question+'</p>                         </div>                        </div>                        <div class="col-md-2 col-xs-2 avatar">                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">                        </div>                    </div>');
+					chat.append(line);
+					chat.stop().animate({ scrollTop: chat.prop("scrollHeight")});
 
-				  console.log(ai_answer);
-				  console.log(ai_question);
-				  console.log(timestamp);
-				  console.log(unix_timestamp);
-				  console.log(user_id);
-				  console.log('===================================================');
+					// append answer
+					var line = $('<div class="row msg_container base_receive">                        <div class="col-md-2 col-xs-2 avatar">                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">                        </div>                        <div class="col-md-10 col-xs-10">                            <div class="messages msg_receive">                                <p>'+ai_answer+'</p>                            </div>                        </div>                    </div>');
+					chat.append(line);
+					chat.stop().animate({ scrollTop: chat.prop("scrollHeight")});
 
-				// append question
-				var line = $('   <div class="row msg_container base_sent">                        <div class="col-md-10 col-xs-10">                          <div class="messages msg_sent">                                <p>'+ai_question+'</p>                         </div>                        </div>                        <div class="col-md-2 col-xs-2 avatar">                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">                        </div>                    </div>');
-				chat.append(line);
-				chat.stop().animate({ scrollTop: chat.prop("scrollHeight")});
+					});		
 
-				// append answer
-				var line = $('<div class="row msg_container base_receive">                        <div class="col-md-2 col-xs-2 avatar">                            <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive ">                        </div>                        <div class="col-md-10 col-xs-10">                            <div class="messages msg_receive">                                <p>'+ai_answer+'</p>                            </div>                        </div>                    </div>');
-				chat.append(line);
-				chat.stop().animate({ scrollTop: chat.prop("scrollHeight")});
-
-				});		
-
-	    	}
-		}
-	});
+		    	}
+			}
+		});
+	}
 	
 	// submit user input and get chat-bot's reply
 	var submitChat = function() {
