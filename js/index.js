@@ -54,12 +54,12 @@ $(function() {
 
 					// append question
 					var user = $.cookie('name');
-					var line = $('  <div class="pull-right">'+user+'</div> <div class="row msg_container base_sent">              <div class="col-md-10 col-xs-10">                          <div class="messages msg_sent">                                <p> '+ai_question+'</p>                         </div>                        </div></div>');
+					var line = $('  <div class="pull-right" style="color:#bbb">Me </div><div class="row msg_container base_sent">              <div class="col-md-12 col-xs-12">                          <div class="messages msg_sent">                                <p> '+ai_question+'</p>                         </div>                        </div></div>');
 					chat.append(line);
 					chat.stop().animate({ scrollTop: chat.prop("scrollHeight")});
 
 					// append answer
-					var line = $('<div class="pull-left">SimpleCRM</div><div class="row msg_container base_receive">                            <div class="col-md-10 col-xs-10">                            <div class="messages msg_receive">                                <p> '+ai_answer+'</p>                            </div>                        </div>                    </div>');
+					var line = $('<div class="pull-left" style="color:#bbb"><img src="simple.png" class=" img-responsive "> </div><div class="row msg_container base_receive">                            <div class="col-md-12 col-xs-12">                            <div class="messages msg_receive">                                <p> '+ai_answer+'</p>                            </div>                        </div>                    </div>');
 					chat.append(line);
 					chat.stop().animate({ scrollTop: chat.prop("scrollHeight")});
 
@@ -177,10 +177,10 @@ $(function() {
 	
 		var style = 'you';
 		var user = $.cookie('name');
-		var line = $('  <div class="pull-right">'+user+'</div> <div class="row msg_container base_sent">                        <div class="col-md-10 col-xs-10">                          <div class="messages msg_sent">                                <p>'+text+'</p>                         </div>                        </div></div>');
+		var line = $('  <div class="pull-right"  style="color:#bbb">Me</div> <div class="row msg_container base_sent">                        <div class="col-md-10 col-xs-10">                          <div class="messages msg_sent">                                <p>'+text+'</p>                         </div>                        </div></div>');
 		if(party != you) {
 			style = 'other';
-			var line = $('<div class="pull-left">SimpleCRM</div><div class="row msg_container base_receive"> <div class="col-md-10 col-xs-10">                            <div class="messages msg_receive">                                <p>'+text+'</p>                            </div>                        </div>                    </div>');
+			var line = $('<div class="pull-left"  style="color:#bbb"><img src="simple.png" class=" img-responsive "></div><div class="row msg_container base_receive"> <div class="col-md-10 col-xs-10">                            <div class="messages msg_receive">                                <p>'+text+'</p>                            </div>                        </div>                    </div>');
 		}
 		
 		
