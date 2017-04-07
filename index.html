@@ -22,6 +22,8 @@ $(document).on('click', '.panel-heading span.icon_minim', function (e) {
         $this.removeClass('panel-collapsed');
         $this.removeClass('glyphicon-plus').addClass('glyphicon-minus');
     }
+    checkCookie();
+      
 });
 $(document).on('focus', '.panel-footer input.chat_input', function (e) {
     var $this = $(this);
@@ -31,17 +33,11 @@ $(document).on('focus', '.panel-footer input.chat_input', function (e) {
         $('#minim_chat_window').removeClass('glyphicon-plus').addClass('glyphicon-minus');
     }
 });
-$(document).on('click', '#new_chat', function (e) {
-    var size = $( ".chat-window:last-child" ).css("margin-left");
-     size_total = parseInt(size) + 400;
-    alert(size_total);
-    var clone = $( "#chat_window_1" ).clone().appendTo( ".container" );
-    clone.css("margin-left", size_total);
-});
+
 
 $(document).on('click', '#open_new_chat', function (e) {
 
-window.open("http://localhost/chatbot",null,
+window.open("http://localhost/apiai",null,
 "height=600,width=700,status=yes,toolbar=no,menubar=no,location=no");
 
 // e.preventDefault();
@@ -266,21 +262,24 @@ img {
 <script type="text/javascript" src="js/index.js"></script>
 
 <script type="text/javascript"> 
+function checkCookie()
+{
+    var userId = $.cookie("userId");
+    var name = $.cookie("name");
+    if(userId){
+        $('.enterMessage').show();
+        $('.sendMessage').hide();
+        $('.chatbody').show();
+        $('.initialbody').hide();
+    }else{
+        $('.enterMessage').hide();
+        $('.sendMessage').show();
+        $('.chatbody').hide();
+        $('.initialbody').show();
+    }
+}
       $(document).ready(function() { 
-
-        var userId = $.cookie("userId");
-        var name = $.cookie("name");
-        if(userId){
-            $('.enterMessage').show();
-            $('.sendMessage').hide();
-            $('.chatbody').show();
-            $('.initialbody').hide();
-        }else{
-            $('.enterMessage').hide();
-            $('.sendMessage').show();
-            $('.chatbody').hide();
-            $('.initialbody').show();
-        }
+        checkCookie();
          $("#form").validate({ 
           rules: { 
             name: "required", 
