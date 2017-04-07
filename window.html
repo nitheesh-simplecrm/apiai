@@ -37,8 +37,8 @@ $(document).on('focus', '.panel-footer input.chat_input', function (e) {
 
 $(document).on('click', '#open_new_chat', function (e) {
 
-window.open("http://localhost/chatbot/git/apiai/window.html",null,
-"height=500,width=850,status=yes,toolbar=no,menubar=no,location=no");
+window.open("http://localhost/apiai",null,
+"height=600,width=700,status=yes,toolbar=no,menubar=no,location=no");
 
 // e.preventDefault();
 // window.open($(this).attr("href"), "popupWindow", "width=600,height=600,scrollbars=yes");
@@ -54,7 +54,7 @@ $(document).on('click', '.icon_close', function (e) {
 
 <style>
 body{
-    height:400px;
+    height:600px !important;
     position: fixed;
     bottom: 0;
     font-family: "open_sans", Tahoma, Arial, Verdana, sans-serif
@@ -189,7 +189,10 @@ img {
     bottom:0;
 }
 #chat_window_1{
-    width: 1200px;
+    width: 2200px;
+    height: 98% !important;
+    margin-top: 100px !important;
+    margin-left: 150px;
 }
 .enterMessage{
     display: none;
@@ -205,15 +208,10 @@ img {
         <div class="col-xs-3 col-md-3">
         	<div class="panel panel-default">
                 <div class="panel-heading top-bar" style="background-color:#03363D;color:#FAFAFA; !important">
-                    <div class="col-md-8 col-xs-8">
-                          <h6 class="panel-title" style="font-size:12px; !important"><span class="glyphicon glyphicon-comment"></span> SimpleCRM 24/7</h6> 
+                    <div class="col-md-12 col-xs-12">
+                          <center><h6 class="panel-title" style="font-size:12px; !important"><span class="glyphicon glyphicon-comment"></span> SimpleCRM 24/7</h6></center>
                     </div>
-                    <div class="col-md-2 col-xs-2" style="text-align: right;">
-                        <a href="#"><span id="open_new_chat" class="glyphicon glyphicon-new-window" style="color:#FAFAFA; !important"></span></a>
-                    </div>
-                    <div class="col-md-2 col-xs-2" style="text-align: right;">
-                        <a href="#"><span id="minim_chat_window" class="glyphicon glyphicon-minus icon_minim" style="color:#FAFAFA; !important"></span></a>
-                    </div>
+                
                 </div>
                 <form id="form" name="form">
                 <div class="panel-body msg_container_base chat chatbody">
